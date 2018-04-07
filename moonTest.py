@@ -34,30 +34,20 @@ Seq = [[1,0,0,1],
 StepCount = len(Seq)
 StepDir = -1 # Set to 1 or 2 for anti-clockwise (spindle up) 
              # Set to -1 or -2 for clockwise (spindle up) 
-def dir(n):
-  global StepDir
-  if n == -1:
-    StepDir = -1
-    print('StepDir = -1 (clockwise)')
-  elif n == 1:
-    StepDir = 1
-    print('StepDir = 1 (anti-clockwise)')
-  else:
-    print('Param must be either -1 or 1')
-    pass
 
 # Initialise variables
 StepCounter = 0
 TotalSteps = 0
+numSteps = 100
 
 # Start main loop
 #while TotalSteps <= 4100: #roughly num steps for 360
-while TotalSteps <= 100:
-  #print(StepCounter)
+
+def run():
+  while TotalSteps <= 100:
   for pin in range(0,4):
     xpin=StepPins[pin]# Get GPIO
     if Seq[StepCounter][pin]!=0:
-      #print(" Enable GPIO %i" %(xpin))
       GPIO.output(xpin, True)
     else:
       GPIO.output(xpin, False)
@@ -78,3 +68,17 @@ while TotalSteps <= 100:
 
 # Will this work here?
 GPIO.cleanup()
+
+''' # Weirdly this isn't working but I can set this from the CL
+def dir(n):
+  global StepDir
+  if n == -1:
+    StepDir = -1
+    print('StepDir = -1 (clockwise)')
+  elif n == 1:
+    StepDir = 1
+    print('StepDir = 1 (anti-clockwise)')
+  else:
+    print('Param must be either -1 or 1')
+    pass
+'''
