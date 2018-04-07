@@ -10,9 +10,13 @@ import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
-# Define GPIO signals to use Physical pins 11,15,16,18 GPIO17,GPIO22,GPIO23,GPIO24
-#StepPins = [17,22,23,24]
-StepPins = [17,18,27,22] #for Motor A
+# Define BCM GPIO references as follows
+#StepPins = [17,18,27,22] #for M0 (alt-1)
+#StepPins = [23,24,25,04] #for M1 (az-1)
+#StepPins = [13,12,6,5] #for M2 (az-2)
+#StepPins = [20,26,16,19] #for M3 (alt-2)
+
+StepPins = [20,26,16,19] #for M3 (alt-2)
 
 # Set all pins as output
 for pin in StepPins:
@@ -45,7 +49,7 @@ StepCounter = 0
 TotalSteps = 0
 
 # Start main loop
-while TotalSteps <= 4100: 
+while TotalSteps <= 4100: #roughly num steps for 360
   #print(StepCounter)
   for pin in range(0,4):
     xpin=StepPins[pin]# Get GPIO
