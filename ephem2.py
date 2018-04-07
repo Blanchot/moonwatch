@@ -1,4 +1,4 @@
-# Ephem2.py
+# ephem2.py
 # Runs every 5 minutes
 
 import ephem
@@ -10,7 +10,7 @@ home.lat = ephem.degrees('51:54:39')
 home.lon = ephem.degrees('4:30:1')
 
 while True:
-  sun = ephem.Sun(), 
+  sun = ephem.Sun()
   moon = ephem.Moon()
   sun.compute(home)
   moon.compute(home)
