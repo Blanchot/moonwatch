@@ -45,26 +45,26 @@ numSteps = 100
 
 def run():
   while TotalSteps <= 100:
-  for pin in range(0,4):
-    xpin=StepPins[pin]# Get GPIO
-    if Seq[StepCounter][pin]!=0:
-      GPIO.output(xpin, True)
-    else:
-      GPIO.output(xpin, False)
+    for pin in range(0,4):
+      xpin=StepPins[pin]# Get GPIO
+      if Seq[StepCounter][pin]!=0:
+        GPIO.output(xpin, True)
+      else:
+        GPIO.output(xpin, False)
+      
+    StepCounter += StepDir
+    TotalSteps += 1 #total step counter
+    #print(TotalSteps)
 
-  StepCounter += StepDir
-  TotalSteps += 1 #total step counter
-  #print(TotalSteps)
+    # If we reach the end of the sequence start again
+    if (StepCounter>=StepCount):
+      StepCounter = 0
+    if (StepCounter<0):
+      StepCounter = StepCount+StepDir
 
-  # If we reach the end of the sequence start again
-  if (StepCounter>=StepCount):
-    StepCounter = 0
-  if (StepCounter<0):
-    StepCounter = StepCount+StepDir
-
-  # Wait before moving on
-  WaitTime = 10/float(1000)
-  time.sleep(WaitTime)
+    # Wait before moving on
+    WaitTime = 10/float(1000)
+    time.sleep(WaitTime)
 
 # Will this work here?
 GPIO.cleanup()
