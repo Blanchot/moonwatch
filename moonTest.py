@@ -35,16 +35,16 @@ StepCount = len(Seq)
 StepDir = -1 # Set to 1 or 2 for anti-clockwise (spindle up) 
              # Set to -1 or -2 for clockwise (spindle up) 
 def dir(n):
-	global StepDir
-	if n == -1:
-		StepDir = -1
-		print('StepDir = -1 (clockwise)')
-	elif n == 1:
-		StepDir = 1
-		print('StepDir = 1 (anti-clockwise)')
-	else:
-		print('Param must be either -1 or 1')
-		pass
+  global StepDir
+  if n == -1:
+    StepDir = -1
+    print('StepDir = -1 (clockwise)')
+  elif n == 1:
+    StepDir = 1
+    print('StepDir = 1 (anti-clockwise)')
+  else:
+    print('Param must be either -1 or 1')
+    pass
 
 # Initialise variables
 StepCounter = 0
