@@ -5,11 +5,14 @@ import ephem
 import math
 import time 
 
-home = ephem.Observer()
-home.lat = ephem.degrees('51:54:39')
-home.lon = ephem.degrees('4:30:1')
+
 
 while True:
+  # Need to create a new Observer object for each current time 
+  home = ephem.Observer()
+  home.lat = ephem.degrees('51:54:39')
+  home.lon = ephem.degrees('4:30:1')
+
   sun = ephem.Sun()
   moon = ephem.Moon()
   sun.compute(home)
@@ -26,10 +29,12 @@ while True:
   moonAz = int(math.degrees(moon.az))
   moonAlt = int(math.degrees(moon.alt))
   
+  print(time.ctime())
   print('Sun   Azimuth:',sunAz)
   print('Sun  Altitude:',sunAlt)
   print('Moon  Azimuth:',moonAz)
   print('Moon Altitude:',moonAlt)
-
-  time.sleep(30)
+  print()
+  
+  time.sleep(300)
 
