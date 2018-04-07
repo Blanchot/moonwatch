@@ -38,18 +38,21 @@ StepCount = len(Seq)
 StepDir = -1 # Set to 1 or 2 for anti-clockwise (spindle up) 
              # Set to -1 or -2 for clockwise (spindle up) 
 
+'''
 # Read wait time from command line
 if len(sys.argv)>1:
   WaitTime = int(sys.argv[1])/float(1000)
 else:
   WaitTime = 10/float(1000)
+'''
 
 # Initialise variables
 StepCounter = 0
 TotalSteps = 0
 
 # Start main loop
-while TotalSteps <= 4100: #roughly num steps for 360
+#while TotalSteps <= 4100: #roughly num steps for 360
+while TotalSteps <= 100:
   #print(StepCounter)
   for pin in range(0,4):
     xpin=StepPins[pin]# Get GPIO
@@ -61,7 +64,7 @@ while TotalSteps <= 4100: #roughly num steps for 360
 
   StepCounter += StepDir
   TotalSteps += 1 #total step counter
-  print(TotalSteps)
+  #print(TotalSteps)
 
   # If we reach the end of the sequence start again
   if (StepCounter>=StepCount):
@@ -70,6 +73,7 @@ while TotalSteps <= 4100: #roughly num steps for 360
     StepCounter = StepCount+StepDir
 
   # Wait before moving on
+  WaitTime = 10/float(1000)
   time.sleep(WaitTime)
 
 # Will this work here?
