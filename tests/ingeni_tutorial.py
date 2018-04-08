@@ -86,7 +86,7 @@ def step_4 (p):
 
 
 def steps_8(value):
-  print value
+  print(value)
   global pas
   if(value<0):
     for i in range (0,abs(value)):
@@ -125,8 +125,6 @@ def steps_4(value):
   step_4(0)
 
 
-
-
 if __name__ == "__main__":
 
   GPIO.setmode(GPIO.BCM)
@@ -140,10 +138,10 @@ if __name__ == "__main__":
   pas=1
   print len(sys.argv)
   if(len(sys.argv)<2):
-    print ("Parameter error")
-    print ("Usage: sudo python steeper.py val mode")
-    print ("val = step number >0clockwise, <0 anticlockwise ")
-    print ("mode = 0: 8 phase   2: 1 phase ")
+    print("Parameter error")
+    print("Usage: sudo python steeper.py val mode")
+    print("val = step number >0clockwise, <0 anticlockwise ")
+    print("mode = 0: 8 phase   2: 1 phase ")
   else:
     st=int(sys.argv[1])
     if(len(sys.argv)==3 and sys.argv[2]=="1"):
