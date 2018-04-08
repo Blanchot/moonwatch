@@ -46,6 +46,10 @@ numSteps = 100
 def run():
   GPIO.setmode(GPIO.BCM)
   
+  for pin in StepPins:
+    GPIO.setup(pin,GPIO.OUT)
+    GPIO.output(pin, False)
+  
   global StepCount
   global StepDir
   global StepCounter
