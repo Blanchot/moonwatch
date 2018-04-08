@@ -105,7 +105,7 @@ def steps_8(value):
       pas-=1
   step_8(0)
 def steps_4(value):
-  print value
+  print(value)
   global pas
   if(value<0):
     for i in range (0,abs(value)):
