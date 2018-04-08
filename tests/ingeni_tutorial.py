@@ -136,7 +136,7 @@ if __name__ == "__main__":
 
   step_4(0)
   pas=1
-  print len(sys.argv)
+  print(len(sys.argv))
   if(len(sys.argv)<2):
     print("Parameter error")
     print("Usage: sudo python steeper.py val mode")
@@ -150,4 +150,5 @@ if __name__ == "__main__":
     else:
       print("4 phase moving")
       steps_4(st)
+
 
