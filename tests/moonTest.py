@@ -44,7 +44,13 @@ numSteps = 100
 #while TotalSteps <= 4100: #roughly num steps for 360
 
 def run():
-  while TotalSteps <= 100:
+  global StepCount
+  global StepDir
+  global StepCounter
+  global TotalSteps
+  global numSteps
+  
+  while TotalSteps <= numSteps:
     for pin in range(0,4):
       xpin=StepPins[pin]# Get GPIO
       if Seq[StepCounter][pin]!=0:
