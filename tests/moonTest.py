@@ -44,6 +44,8 @@ numSteps = 100
 #while TotalSteps <= 4100: #roughly num steps for 360
 
 def run():
+  GPIO.setmode(GPIO.BCM)
+  
   global StepCount
   global StepDir
   global StepCounter
