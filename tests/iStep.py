@@ -1,10 +1,11 @@
+#iStep.py
+#Code from here: http://ingeniapp.com/en/stepper-motor-control-with-raspberry-pi/
 import time
 import sys
 import RPi.GPIO as GPIO
 
 
 def step_8 (p):
-
   if p==0:
     GPIO.output(5,0)
     GPIO.output(6,0)
@@ -53,8 +54,8 @@ def step_8 (p):
     GPIO.output(6,0)
     GPIO.output(12,0)
     GPIO.output(13,1)
-def step_4 (p):
 
+def step_4 (p):
   if p==0:
     GPIO.output(5,0)
     GPIO.output(6,0)
@@ -95,7 +96,6 @@ def steps_8(value):
       pas+=1
       if(pas>=9):
         pas=1;
-
   else:
     for i in range (0,abs(value)):
       step_8(pas)
@@ -104,6 +104,7 @@ def steps_8(value):
         pas=9;
       pas-=1
   step_8(0)
+
 def steps_4(value):
   print(value)
   global pas
@@ -114,7 +115,6 @@ def steps_4(value):
       pas+=1
       if(pas>=5):
         pas=1;
-
   else:
     for i in range (0,abs(value)):
       step_4(pas)
@@ -126,7 +126,7 @@ def steps_4(value):
 
 
 if __name__ == "__main__":
-
+  
   GPIO.setmode(GPIO.BCM)
   GPIO.setwarnings(False)
   GPIO.setup(5, GPIO.OUT)
@@ -150,5 +150,4 @@ if __name__ == "__main__":
     else:
       print("4 phase moving")
       steps_4(st)
-
 
