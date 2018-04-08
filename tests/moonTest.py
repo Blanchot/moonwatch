@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # moonTest.py for testing and calibration
+# NOTE THIS CODE IS NOT WORKING AND A HOT MESS!
 
 import sys, time
 import RPi.GPIO as GPIO
