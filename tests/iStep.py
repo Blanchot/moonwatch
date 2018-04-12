@@ -1,6 +1,6 @@
 #iStep.py
 #Code from here: http://ingeniapp.com/en/stepper-motor-control-with-raspberry-pi/
-#Test two motors
+#Test three motors, change time sleep from 0.005 to 0.01
 import time
 import sys
 import RPi.GPIO as GPIO
@@ -99,20 +99,67 @@ def m2step_8 (p):
     GPIO.output(12,0)
     GPIO.output(13,1)
 
+def m3step_8 (p):
+  if p==0:
+    GPIO.output(19,0)
+    GPIO.output(16,0)
+    GPIO.output(26,0)
+    GPIO.output(20,0)
+  if p==1:
+    GPIO.output(19,1)
+    GPIO.output(16,0)
+    GPIO.output(26,0)
+    GPIO.output(20,0)
+  if p==2:
+    GPIO.output(19,1)
+    GPIO.output(16,1)
+    GPIO.output(26,0)
+    GPIO.output(20,0)
+  if p==3:
+    GPIO.output(19,0)
+    GPIO.output(16,1)
+    GPIO.output(26,0)
+    GPIO.output(20,0)
+  if p==4:
+    GPIO.output(19,0)
+    GPIO.output(16,1)
+    GPIO.output(26,1)
+    GPIO.output(20,0)
+  if p==5:
+    GPIO.output(19,0)
+    GPIO.output(16,0)
+    GPIO.output(26,1)
+    GPIO.output(20,0)
+  if p==6:
+    GPIO.output(19,0)
+    GPIO.output(16,0)
+    GPIO.output(26,1)
+    GPIO.output(20,1)
+  if p==7:
+    GPIO.output(19,0)
+    GPIO.output(16,0)
+    GPIO.output(26,0)
+    GPIO.output(20,1)
+  if p==8:
+    GPIO.output(19,1)
+    GPIO.output(16,0)
+    GPIO.output(26,0)
+    GPIO.output(20,1)
+
 def m1steps_8(value):
   print(value)
   global pas
   if(value<0):
     for i in range (0,abs(value)):
       m1step_8(pas)
-      time.sleep(0.005)
+      time.sleep(0.01)
       pas+=1
       if(pas>=9):
         pas=1;
   else:
     for i in range (0,abs(value)):
       m1step_8(pas)
-      time.sleep(0.005)
+      time.sleep(0.01)
       if(pas==1):
         pas=9;
       pas-=1
@@ -124,35 +171,62 @@ def m2steps_8(value):
   if(value<0):
     for i in range (0,abs(value)):
       m2step_8(pas)
-      time.sleep(0.005)
+      time.sleep(0.01)
       pas+=1
       if(pas>=9):
         pas=1;
   else:
     for i in range (0,abs(value)):
       m2step_8(pas)
-      time.sleep(0.005)
+      time.sleep(0.01)
       if(pas==1):
         pas=9;
       pas-=1
   m2step_8(0)
 
+def m3steps_8(value):
+  print(value)
+  global pas 
+  if(value<0):
+    for i in range (0,abs(value)):
+      m3step_8(pas)
+      time.sleep(0.01)
+      pas+=1
+      if(pas>=9):
+        pas=1;
+  else:
+    for i in range (0,abs(value)):
+      m3step_8(pas)
+      time.sleep(0.01)
+      if(pas==1):
+        pas=9;
+      pas-=1
+  m3step_8(0)
+
 if __name__ == "__main__":
   
   GPIO.setmode(GPIO.BCM)
   GPIO.setwarnings(False)
-  #motor 0 (m0)
-  #motor 1 (m1)
+  #motor 0 (m0 right altitude)
+  GPIO.setup(22, GPIO.OUT)
+  GPIO.setup(27, GPIO.OUT)
+  GPIO.setup(18, GPIO.OUT)
+  GPIO.setup(17, GPIO.OUT)
+  #motor 1 (m1 right azimuth)
   GPIO.setup(23, GPIO.OUT)
   GPIO.setup(24, GPIO.OUT)
   GPIO.setup(25, GPIO.OUT)
   GPIO.setup(4, GPIO.OUT)
-  #motor 2 (m2)
+  #motor 2 (m2 left azimuth)
   GPIO.setup(5, GPIO.OUT)
   GPIO.setup(6, GPIO.OUT)
   GPIO.setup(12, GPIO.OUT)
   GPIO.setup(13, GPIO.OUT)
-  #motor 3 (m3)
+  #motor 3 (m3 left altitude)
+  GPIO.setup(19, GPIO.OUT)
+  GPIO.setup(16, GPIO.OUT)
+  GPIO.setup(26, GPIO.OUT)
+  GPIO.setup(20, GPIO.OUT)
 
   #step_8(0) #changed in original code from step_4(0)
   pas=1
@@ -166,7 +240,7 @@ if __name__ == "__main__":
     st=int(sys.argv[1])
     if(len(sys.argv)==3 and sys.argv[2]=="0"):
       print("m0: right altitude")
-      #steps_8(st)
+      #m0steps_8(st)
     elif(len(sys.argv)==3 and sys.argv[2]=="1"):
       print("m1: right azimuth")
       m1steps_8(st)
@@ -175,7 +249,7 @@ if __name__ == "__main__":
       m2steps_8(st)
     elif(len(sys.argv)==3 and sys.argv[2]=="3"):
       print("m3: left altitude")
-      #steps_8(st)
+      m3steps_8(st)
     else:
       print("motor selection arg out of range")
 
