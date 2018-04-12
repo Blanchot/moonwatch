@@ -197,7 +197,7 @@ def m3steps_8(value):
   else:
     for i in range (0,abs(value)):
       m3step_8(pas)
-      time.sleep(0.01)
+      time.sleep(0.005)
       if(pas==1):
         pas=9;
       pas-=1
@@ -252,4 +252,4 @@ if __name__ == "__main__":
       m3steps_8(st)
     else:
       print("motor selection arg out of range")
-
+  GPIO.cleanup()
