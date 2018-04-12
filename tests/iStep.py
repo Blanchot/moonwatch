@@ -1,5 +1,6 @@
 #iStep.py
 #Code from here: http://ingeniapp.com/en/stepper-motor-control-with-raspberry-pi/
+#Commented out 4 step code
 import time
 import sys
 import RPi.GPIO as GPIO
@@ -55,6 +56,7 @@ def step_8 (p):
     GPIO.output(12,0)
     GPIO.output(13,1)
 
+'''
 def step_4 (p):
   if p==0:
     GPIO.output(5,0)
@@ -84,7 +86,7 @@ def step_4 (p):
     GPIO.output(6,0)
     GPIO.output(12,0)
     GPIO.output(13,1)
-
+'''
 
 def steps_8(value):
   print(value)
@@ -105,6 +107,7 @@ def steps_8(value):
       pas-=1
   step_8(0)
 
+'''
 def steps_4(value):
   print(value)
   global pas
@@ -123,7 +126,7 @@ def steps_4(value):
         pas=5;
       pas-=1
   step_4(0)
-
+'''
 
 if __name__ == "__main__":
   
@@ -134,7 +137,7 @@ if __name__ == "__main__":
   GPIO.setup(12, GPIO.OUT)
   GPIO.setup(13, GPIO.OUT)
 
-  step_4(0)
+  step_8(0) #changed in original code from step_4(0)
   pas=1
   print(len(sys.argv))
   if(len(sys.argv)<2):
