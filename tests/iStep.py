@@ -169,7 +169,7 @@ if __name__ == "__main__":
       #steps_8(st)
     elif(len(sys.argv)==3 and sys.argv[2]=="1"):
       print("m1: right azimuth")
-      #steps_8(st)
+      m1steps_8(st)
     elif(len(sys.argv)==3 and sys.argv[2]=="2"):
       print("m2: left azimuth")
       m2steps_8(st)
