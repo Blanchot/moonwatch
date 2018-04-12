@@ -1,6 +1,6 @@
 #iStep.py
 #Code from here: http://ingeniapp.com/en/stepper-motor-control-with-raspberry-pi/
-#Commented out 4 step code
+#Removed 4 step code and added preliminary motor selection
 import time
 import sys
 import RPi.GPIO as GPIO
@@ -56,38 +56,6 @@ def step_8 (p):
     GPIO.output(12,0)
     GPIO.output(13,1)
 
-'''
-def step_4 (p):
-  if p==0:
-    GPIO.output(5,0)
-    GPIO.output(6,0)
-    GPIO.output(12,0)
-    GPIO.output(13,0)
-
-  if p==1:
-    GPIO.output(5,1)
-    GPIO.output(6,1)
-    GPIO.output(12,0)
-    GPIO.output(13,0)
-
-  if p==2:
-    GPIO.output(5,0)
-    GPIO.output(6,1)
-    GPIO.output(12,1)
-    GPIO.output(13,0)
-
-  if p==3:
-    GPIO.output(5,0)
-    GPIO.output(6,0)
-    GPIO.output(12,1)
-    GPIO.output(13,1)
-  if p==4:
-    GPIO.output(5,1)
-    GPIO.output(6,0)
-    GPIO.output(12,0)
-    GPIO.output(13,1)
-'''
-
 def steps_8(value):
   print(value)
   global pas
@@ -106,27 +74,6 @@ def steps_8(value):
         pas=9;
       pas-=1
   step_8(0)
-
-'''
-def steps_4(value):
-  print(value)
-  global pas
-  if(value<0):
-    for i in range (0,abs(value)):
-      step_4(pas)
-      time.sleep(0.005)
-      pas+=1
-      if(pas>=5):
-        pas=1;
-  else:
-    for i in range (0,abs(value)):
-      step_4(pas)
-      time.sleep(0.005)
-      if(pas==1):
-        pas=5;
-      pas-=1
-  step_4(0)
-'''
 
 if __name__ == "__main__":
   
@@ -147,10 +94,18 @@ if __name__ == "__main__":
     print("mode = 0: 8 phase   2: 1 phase ")
   else:
     st=int(sys.argv[1])
-    if(len(sys.argv)==3 and sys.argv[2]=="1"):
-      print("8 phase moving")
+    if(len(sys.argv)==3 and sys.argv[2]=="0"):
+      print("m0: right altitude")
+      #steps_8(st)
+    elif(len(sys.argv)==3 and sys.argv[2]=="1"):
+      print("m1: right azimuth")
+      #steps_8(st)
+    elif(len(sys.argv)==3 and sys.argv[2]=="2"):
+      print("m2: left azimuth")
       steps_8(st)
+    elif(len(sys.argv)==3 and sys.argv[2]=="3"):
+      print("m3: left altitude")
+      #steps_8(st)
     else:
-      print("4 phase moving")
-      steps_4(st)
+      print("motor selection arg out of range")
 
