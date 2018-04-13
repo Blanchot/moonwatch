@@ -5,6 +5,7 @@
 import time
 import sys
 import RPi.GPIO as GPIO
+pas = 1
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
@@ -294,7 +295,7 @@ def m3steps_8(value):
   m3step_8(0)
 
 def watch(amount,motor):
-  pas = 1
+  #pas = 1
   st = amount
   if motor == 0:
     #print("m0: right altitude")
