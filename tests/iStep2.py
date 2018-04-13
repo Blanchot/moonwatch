@@ -311,7 +311,7 @@ def watch(amount,motor):
     m3steps_8(st)
   else:
     print("motor selector out of range")
-  GPIO.cleanup()
+  #GPIO.cleanup()
 
 '''  
 if __name__ == "__main__":
