@@ -296,16 +296,16 @@ def m3steps_8(value):
 def watch(amount,motor):
   pas = 1
   st = amount
-  if motor = 0:
+  if motor == 0:
     #print("m0: right altitude")
     m0steps_8(st)
-  elif motor = 1:
+  elif motor == 1:
     #print("m1: right azimuth")
     m1steps_8(st)
-  elif motor = 2:
+  elif motor == 2:
     #print("m2: left azimuth")
     m2steps_8(st)
-  elif motor = 3:
+  elif motor == 3:
     #print("m3: left altitude")
     m3steps_8(st)
   else:
