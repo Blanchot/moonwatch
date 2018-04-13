@@ -1,9 +1,56 @@
 #iStep.py
 #Code from here: http://ingeniapp.com/en/stepper-motor-control-with-raspberry-pi/
-#Test three motors, change time sleep from 0.005 to 0.01
+#Test four motors
 import time
 import sys
 import RPi.GPIO as GPIO
+
+def m0step_8 (p):
+  if p==0:
+    GPIO.output(22,0)
+    GPIO.output(27,0)
+    GPIO.output(18,0)
+    GPIO.output(17,0)
+  if p==1:
+    GPIO.output(22,1)
+    GPIO.output(27,0)
+    GPIO.output(18,0)
+    GPIO.output(17,0)
+  if p==2:
+    GPIO.output(22,1)
+    GPIO.output(27,1)
+    GPIO.output(18,0)
+    GPIO.output(17,0)
+  if p==3:
+    GPIO.output(22,0)
+    GPIO.output(27,1)
+    GPIO.output(18,0)
+    GPIO.output(17,0)
+  if p==4:
+    GPIO.output(22,0)
+    GPIO.output(27,1)
+    GPIO.output(18,1)
+    GPIO.output(17,0)
+  if p==5:
+    GPIO.output(22,0)
+    GPIO.output(27,0)
+    GPIO.output(18,1)
+    GPIO.output(17,0)
+  if p==6:
+    GPIO.output(22,0)
+    GPIO.output(27,0)
+    GPIO.output(18,1)
+    GPIO.output(17,1)
+  if p==7:
+    GPIO.output(22,0)
+    GPIO.output(27,0)
+    GPIO.output(18,0)
+    GPIO.output(17,1)
+  if p==8:
+    GPIO.output(22,1)
+    GPIO.output(27,0)
+    GPIO.output(18,0)
+    GPIO.output(17,1)
 
 def m1step_8 (p):
   if p==0:
@@ -146,6 +193,25 @@ def m3step_8 (p):
     GPIO.output(26,0)
     GPIO.output(20,1)
 
+def m0steps_8(value):
+  print(value)
+  global pas
+  if(value<0):
+    for i in range (0,abs(value)):
+      m0step_8(pas)
+      time.sleep(0.01)
+      pas+=1
+      if(pas>=9):
+        pas=1;
+  else:
+    for i in range (0,abs(value)):
+      m0step_8(pas)
+      time.sleep(0.01)
+      if(pas==1):
+        pas=9;
+      pas-=1
+  m0step_8(0)
+
 def m1steps_8(value):
   print(value)
   global pas
@@ -240,7 +306,7 @@ if __name__ == "__main__":
     st=int(sys.argv[1])
     if(len(sys.argv)==3 and sys.argv[2]=="0"):
       print("m0: right altitude")
-      #m0steps_8(st)
+      m0steps_8(st)
     elif(len(sys.argv)==3 and sys.argv[2]=="1"):
       print("m1: right azimuth")
       m1steps_8(st)
