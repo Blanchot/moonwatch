@@ -1,11 +1,16 @@
 #iStep2.py
 #Code from here: http://ingeniapp.com/en/stepper-motor-control-with-raspberry-pi/
-#Non command line version of iStep.py
+#Added count for m1
 
 import time
 import sys
 import RPi.GPIO as GPIO
+
 pas = 1
+m0 = 0 #m0 counter (right altitude)
+m1 = 0 #m1 counter (right azimuth)
+m2 = 0 #m2 counter (left azimuth)
+m3 = 0 #m3 counter (left altitude)
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
@@ -240,10 +245,12 @@ def m0steps_8(value):
 def m1steps_8(value):
   print(value)
   global pas
+  global m1 #m1 counter (right azimuth)
   if(value<0):
     for i in range (0,abs(value)):
       m1step_8(pas)
       time.sleep(0.01)
+      m1 -= 1 #subtract 1 from counter
       pas+=1
       if(pas>=9):
         pas=1;
@@ -251,6 +258,7 @@ def m1steps_8(value):
     for i in range (0,abs(value)):
       m1step_8(pas)
       time.sleep(0.01)
+      m1 += #add 1 to counter
       if(pas==1):
         pas=9;
       pas-=1
