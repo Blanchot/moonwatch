@@ -259,7 +259,7 @@ def m1steps_8(value):
     for i in range (0,abs(value)):
       m1step_8(pas)
       time.sleep(0.01)
-      m1=+=1 #add 1 to counter
+      m1+=1 #add 1 to counter
       print(m1)
       if(pas==1):
         pas=9;
