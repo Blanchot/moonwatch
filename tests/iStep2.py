@@ -1,5 +1,6 @@
 #iStep2.py
 #Code from here: http://ingeniapp.com/en/stepper-motor-control-with-raspberry-pi/
+#Load from CLI: python3 -i iStep2.py
 #Added count for m1
 
 import time
@@ -251,7 +252,6 @@ def m1steps_8(value):
       m1step_8(pas)
       time.sleep(0.01)
       m1-=1 #subtract 1 from counter
-      print(m1)
       pas+=1
       if(pas>=9):
         pas=1;
@@ -260,7 +260,6 @@ def m1steps_8(value):
       m1step_8(pas)
       time.sleep(0.01)
       m1+=1 #add 1 to counter
-      print(m1)
       if(pas==1):
         pas=9;
       pas-=1
