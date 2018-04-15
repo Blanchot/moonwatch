@@ -1,5 +1,6 @@
 #ephem2.py
 #Test sunAz update
+#String format for python 3.5
 
 import ephem
 import math
@@ -18,15 +19,15 @@ def init():
 
 def m1_update(): #sunAz
   global old_m1_stepCount
-  print(f'old_m1_stepCount: {old_m1_stepCount}')
+  print('old_m1_stepCount: {}'.format(old_m1_stepCount))
   global cur_m1_stepCount
-  print(f'cur_m1_stepCount: {cur_m1_stepCount}')
+  print('cur_m1_stepCount: {}'.format(cur_m1_stepCount))
   #curAz = int(input('Current Azimuth: '))
   #print(f'Current Azimuth is: {curAz}')
   cur_m1_stepCount = round(sunAz * steps_1_deg)
-  print(f'cur_m1_stepCount: {cur_m1_stepCount}')
+  print('cur_m1_stepCount: {}'.format(cur_m1_stepCount))
   m1_takeSteps = cur_m1_stepCount - old_m1_stepCount
-  print(f'm1_takeSteps: {m1_takeSteps}')
+  print('m1_takeSteps: {}'.format(m1_takeSteps))
   old_m1_stepCount = cur_m1_stepCount
 
 # Runs every 5 minutes
