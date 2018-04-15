@@ -1,11 +1,9 @@
-# ephem2.py
+# ephem1.1.py
 # Runs every 5 minutes
 
 import ephem
 import math
 import time 
-
-
 
 while True:
   # Need to create a new Observer object for each current time 
