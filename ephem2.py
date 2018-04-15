@@ -25,13 +25,12 @@ def m1_update(): #sunAz
   #curAz = int(input('Current Azimuth: '))
   #print(f'Current Azimuth is: {curAz}')
   cur_m1_stepCount = round(sunAz * steps_1_deg)
-  print('cur_m1_stepCount: {}'.format(cur_m1_stepCount))
+  #print('cur_m1_stepCount: {}'.format(cur_m1_stepCount))
   m1_takeSteps = cur_m1_stepCount - old_m1_stepCount
   print('m1_takeSteps: {}'.format(m1_takeSteps))
   old_m1_stepCount = cur_m1_stepCount
 
 # Runs every 5 minutes
-
 while True:
   # Need to create a new Observer object for each current time 
   home = ephem.Observer()
@@ -62,5 +61,5 @@ while True:
   print('Moon Altitude:',moonAlt)
   print()
   m1_update()
-  
+  print()
   time.sleep(300)
