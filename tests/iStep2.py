@@ -7,10 +7,10 @@ import time
 import sys
 import RPi.GPIO as GPIO
 
-m0pas = 0
+m0pas = 1
 m1pas = 1
-m2pas = 2
-m3pas =3
+m2pas = 1
+m3pas = 1
 m0 = 0 #m0 counter (right altitude)
 m1 = 0 #m1 counter (right azimuth)
 m2 = 0 #m2 counter (left azimuth)
