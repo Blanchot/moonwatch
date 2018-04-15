@@ -7,7 +7,10 @@ import time
 import sys
 import RPi.GPIO as GPIO
 
-pas = 1
+m0pas = 0
+m1pas = 1
+m2pas = 2
+m3pas =3
 m0 = 0 #m0 counter (right altitude)
 m1 = 0 #m1 counter (right azimuth)
 m2 = 0 #m2 counter (left azimuth)
@@ -226,85 +229,87 @@ def m3step_8 (p):
 
 def m0steps_8(value):
   print(value)
-  global pas
+  global m0pas
+  global m0 #m0 counter (right altitude)
   if(value<0):
     for i in range (0,abs(value)):
-      m0step_8(pas)
+      m0step_8(m0pas)
       time.sleep(0.01)
-      pas+=1
-      if(pas>=9):
-        pas=1;
+      m0-=1 #subtract 1 from counter
+      m0pas+=1
+      if(m0pas>=9):
+        m0pas=1;
   else:
     for i in range (0,abs(value)):
-      m0step_8(pas)
+      m0step_8(m0pas)
       time.sleep(0.01)
-      if(pas==1):
-        pas=9;
-      pas-=1
+      m0+=1 #add 1 to counter
+      if(m0pas==1):
+        m0pas=9;
+      m0pas-=1
   m0step_8(0)
 
 def m1steps_8(value):
   print(value)
-  global pas
+  global m1pas
   global m1 #m1 counter (right azimuth)
   if(value<0):
     for i in range (0,abs(value)):
-      m1step_8(pas)
+      m1step_8(m1pas)
       time.sleep(0.01)
       m1-=1 #subtract 1 from counter
-      pas+=1
-      if(pas>=9):
-        pas=1;
+      m1pas+=1
+      if(m1pas>=9):
+        m1pas=1;
   else:
     for i in range (0,abs(value)):
-      m1step_8(pas)
+      m1step_8(m1pas)
       time.sleep(0.01)
       m1+=1 #add 1 to counter
-      if(pas==1):
-        pas=9;
-      pas-=1
+      if(m1pas==1):
+        m1pas=9;
+      m1pas-=1
   m1step_8(0)
 
 def m2steps_8(value):
   print(value)
-  global pas 
+  global m2pas
   if(value<0):
     for i in range (0,abs(value)):
-      m2step_8(pas)
+      m2step_8(m2pas)
       time.sleep(0.01)
-      pas+=1
-      if(pas>=9):
-        pas=1;
+      m2pas+=1
+      if(m2pas>=9):
+        m2pas=1;
   else:
     for i in range (0,abs(value)):
-      m2step_8(pas)
+      m2step_8(m2pas)
       time.sleep(0.01)
-      if(pas==1):
-        pas=9;
-      pas-=1
+      if(m2pas==1):
+        m2pas=9;
+      m2pas-=1
   m2step_8(0)
 
 def m3steps_8(value):
   print(value)
-  global pas 
+  global m3pas
   if(value<0):
     for i in range (0,abs(value)):
-      m3step_8(pas)
+      m3step_8(m3pas)
       time.sleep(0.01)
-      pas+=1
-      if(pas>=9):
-        pas=1;
+      m3pas+=1
+      if(m3pas>=9):
+        m3pas=1;
   else:
     for i in range (0,abs(value)):
-      m3step_8(pas)
+      m3step_8(m3pas)
       time.sleep(0.005)
-      if(pas==1):
-        pas=9;
-      pas-=1
+      if(m3pas==1):
+        m3pas=9;
+      m3pas-=1
   m3step_8(0)
 
 def watch(amount,motor):
-  #pas = 1
   st = amount
   if motor == 0:
     #print("m0: right altitude")
