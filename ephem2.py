@@ -59,7 +59,6 @@ while True:
   print('Sun  Altitude:',sunAlt)
   print('Moon  Azimuth:',moonAz)
   print('Moon Altitude:',moonAlt)
-  print()
   m1_update()
   print()
   time.sleep(300)
