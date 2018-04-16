@@ -1,5 +1,5 @@
 #ephem2.py
-#Test sunAz update
+#Added update for all 4 motors
 #String format for python 3.5
 
 import ephem
@@ -42,6 +42,22 @@ def m1_update(): #sunAz
   print('m1 stepCount (old: {}, cur: {}, dif: {})'.format(old_m1_stepCount,cur_m1_stepCount,m1_takeSteps))
   old_m1_stepCount = cur_m1_stepCount
 
+def m2_update(): #moonAz
+  global old_m2_stepCount
+  global cur_m2_stepCount
+  cur_m2_stepCount = round(moonAz * steps_1_deg)
+  m2_takeSteps = cur_m2_stepCount - old_m2_stepCount
+  print('m2 stepCount (old: {}, cur: {}, dif: {})'.format(old_m2_stepCount,cur_m2_stepCount,m2_takeSteps))
+  old_m2_stepCount = cur_m2_stepCount
+
+def m3_update(): #moonAlt
+  global old_m3_stepCount
+  global cur_m3_stepCount
+  cur_m3_stepCount = round(moonAlt * steps_1_deg)
+  m3_takeSteps = cur_m3_stepCount - old_m3_stepCount
+  print('m3 stepCount (old: {}, cur: {}, dif: {})'.format(old_m3_stepCount,cur_m3_stepCount,m3_takeSteps))
+  old_m3_stepCount = cur_m3_stepCount
+
 # Runs every 5 minutes
 while True:
   # Need to create a new Observer object for each current time 
@@ -73,5 +89,7 @@ while True:
   print('Moon Altitude (m3):',moonAlt)
   m0_update()
   m1_update()
+  m2_update()
+  m3_update()
   print()
   time.sleep(300)
