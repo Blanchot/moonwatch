@@ -366,7 +366,7 @@ def m1_update(sunAz): #sunAz
   print('sunAz (m1): {}, steps (old: {}, cur: {}, dif: {})'.format(sunAz, old_m1_stepCount,cur_m1_stepCount,m1_takeSteps))
   old_m1_stepCount = cur_m1_stepCount
 
-def m2_update(): #moonAz
+def m2_update(moonAz): #moonAz
   global old_m2_stepCount
   global cur_m2_stepCount
   cur_m2_stepCount = round(moonAz * steps_1_deg)
@@ -375,7 +375,7 @@ def m2_update(): #moonAz
   print('moonAz (m2): {}, steps (old: {}, cur: {}, dif: {})'.format(moonAz, old_m2_stepCount,cur_m2_stepCount,m2_takeSteps))
   old_m2_stepCount = cur_m2_stepCount
 
-def m3_update(): #moonAlt
+def m3_update(moonAlt): #moonAlt
   global old_m3_stepCount
   global cur_m3_stepCount
   cur_m3_stepCount = round(moonAlt * steps_1_deg)
