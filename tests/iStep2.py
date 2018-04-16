@@ -1,7 +1,7 @@
 #iStep2.py
 #Code from here: http://ingeniapp.com/en/stepper-motor-control-with-raspberry-pi/
 #Load from CLI: python3 -i iStep2.py
-#Changed rotation and counter for m0 and m1
+#Changed rotation and counter for m2 and m3
 
 import time
 import sys
@@ -274,10 +274,12 @@ def m1steps_8(value):
 def m2steps_8(value):
   print(value)
   global m2pas
-  if(value<0):
+  global m2 #m2 counter (left azimuth)
+  if(value>0): #reversed original code- was if(value<0):
     for i in range (0,abs(value)):
       m2step_8(m2pas)
       time.sleep(0.01)
+      m2+=1 #add 1 to counter (reversed)
       m2pas+=1
       if(m2pas>=9):
         m2pas=1;
@@ -285,6 +287,7 @@ def m2steps_8(value):
     for i in range (0,abs(value)):
       m2step_8(m2pas)
       time.sleep(0.01)
+      m2-=1 #subtract 1 from counter (reversed)
       if(m2pas==1):
         m2pas=9;
       m2pas-=1
@@ -293,10 +296,12 @@ def m2steps_8(value):
 def m3steps_8(value):
   print(value)
   global m3pas
-  if(value<0):
+  global m3 #m3 counter (left altitude)
+  if(value>0): #reversed original code- was if(value<0):
     for i in range (0,abs(value)):
       m3step_8(m3pas)
       time.sleep(0.01)
+      m3+=1 #add 1 to counter (reversed)
       m3pas+=1
       if(m3pas>=9):
         m3pas=1;
@@ -304,6 +309,7 @@ def m3steps_8(value):
     for i in range (0,abs(value)):
       m3step_8(m3pas)
       time.sleep(0.005)
+      m3-=1 #subtract 1 from counter (reversed)
       if(m3pas==1):
         m3pas=9;
       m3pas-=1
