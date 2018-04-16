@@ -358,7 +358,7 @@ def m0_update(): #sunAlt
   old_m0_stepCount = cur_m0_stepCount
   #print('m0 stepCount (old: {}, cur: {}, dif: {})'.format(old_m0_stepCount,cur_m0_stepCount,m0_takeSteps))
 
-def m1_update(): #sunAz
+def m1_update(sunAz): #sunAz
   global old_m1_stepCount
   global cur_m1_stepCount
   cur_m1_stepCount = round(sunAz * steps_1_deg)
@@ -412,7 +412,7 @@ def run():
     #print('Moon Altitude (m3):',moonAlt)
     
     #m0_update()
-    m1_update()
+    m1_update(sunAz)
     #m2_update()
     #m3_update()
     #print()
