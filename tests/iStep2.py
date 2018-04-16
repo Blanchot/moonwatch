@@ -1,8 +1,7 @@
 #iStep2.py
 #Code from here: http://ingeniapp.com/en/stepper-motor-control-with-raspberry-pi/
 #Load from CLI: python3 -i iStep2.py
-#Changed name of watch function to cal
-#Added ephem calculations for m1
+#Added sunAlt calculations
 
 import time
 import sys
@@ -349,14 +348,14 @@ cur_m2_stepCount = 0 #current moonAz
 old_m3_stepCount = 0 #old moonAlt
 cur_m3_stepCount = 0 #current moonAlt
 
-def m0_update(): #sunAlt
+def m0_update(sunAlt): #sunAlt
   global old_m0_stepCount
   global cur_m0_stepCount
   cur_m0_stepCount = round(sunAlt * steps_1_deg)
   m0_takeSteps = cur_m0_stepCount - old_m0_stepCount
   m0steps_8(m0_takeSteps)
   old_m0_stepCount = cur_m0_stepCount
-  #print('m0 stepCount (old: {}, cur: {}, dif: {})'.format(old_m0_stepCount,cur_m0_stepCount,m0_takeSteps))
+  print('sunAlt: {}, steps (old: {}, cur: {}, dif: {})'.format(sunAlt, old_m0_stepCount,cur_m0_stepCount,m0_takeSteps))
 
 def m1_update(sunAz): #sunAz
   global old_m1_stepCount
@@ -365,8 +364,7 @@ def m1_update(sunAz): #sunAz
   m1_takeSteps = cur_m1_stepCount - old_m1_stepCount
   m1steps_8(m1_takeSteps)
   old_m1_stepCount = cur_m1_stepCount
-  #print('m1 stepCount (old: {}, cur: {}, dif: {})'.format(old_m1_stepCount,cur_m1_stepCount,m1_takeSteps))
-  
+  print('sunAz: {}, steps (old: {}, cur: {}, dif: {})'.format(sunAz, old_m1_stepCount,cur_m1_stepCount,m1_takeSteps))
 
 def m2_update(): #moonAz
   global old_m2_stepCount
@@ -411,7 +409,7 @@ def run():
     #print('Moon  Azimuth (m2):',moonAz)
     #print('Moon Altitude (m3):',moonAlt)
     
-    #m0_update()
+    m0_update(sunAlt)
     m1_update(sunAz)
     #m2_update()
     #m3_update()
