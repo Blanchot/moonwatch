@@ -254,11 +254,11 @@ def m1steps_8(value):
   print(value)
   global m1pas
   global m1 #m1 counter (right azimuth)
-  if(value>0): #was if(value<0):
+  if(value>0): #reversed original code- was if(value<0):
     for i in range (0,abs(value)):
       m1step_8(m1pas)
       time.sleep(0.01)
-      m1-=1 #subtract 1 from counter
+      m1+=1 #add 1 to counter (reversed)
       m1pas+=1
       if(m1pas>=9):
         m1pas=1;
@@ -266,7 +266,7 @@ def m1steps_8(value):
     for i in range (0,abs(value)):
       m1step_8(m1pas)
       time.sleep(0.01)
-      m1+=1 #add 1 to counter
+      m1-=1 #subtract 1 from counter (reversed)
       if(m1pas==1):
         m1pas=9;
       m1pas-=1
