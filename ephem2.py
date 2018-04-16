@@ -26,7 +26,7 @@ def init():
 def m0_update(): #sunAlt
   global old_m0_stepCount
   global cur_m0_stepCount
-  cur_m0_stepCount = round(moonAz * steps_1_deg)
+  cur_m0_stepCount = round(sunAlt * steps_1_deg)
   m0_takeSteps = cur_m0_stepCount - old_m0_stepCount
   print('m0 stepCount (old: {}, cur: {}, dif: {})'.format(old_m0_stepCount,cur_m0_stepCount,m0_takeSteps))
   old_m0_stepCount = cur_m0_stepCount
