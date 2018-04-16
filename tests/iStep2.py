@@ -1,11 +1,15 @@
 #iStep2.py
 #Code from here: http://ingeniapp.com/en/stepper-motor-control-with-raspberry-pi/
 #Load from CLI: python3 -i iStep2.py
-#Changed rotation and counter for m2 and m3
+#Changed name of watch function to cal
+#Added ephem calculations for m1
 
 import time
 import sys
 import RPi.GPIO as GPIO
+
+import ephem #for ephem code
+import math #for ephem code
 
 m0pas = 1
 m1pas = 1
@@ -315,23 +319,105 @@ def m3steps_8(value):
       m3pas-=1
   m3step_8(0)
 
-def watch(amount,motor):
+def cal(amount,motor): #calibrate motors
   st = amount
   if motor == 0:
-    #print("m0: right altitude")
     m0steps_8(st)
   elif motor == 1:
-    #print("m1: right azimuth")
     m1steps_8(st)
   elif motor == 2:
-    #print("m2: left azimuth")
     m2steps_8(st)
   elif motor == 3:
-    #print("m3: left altitude")
     m3steps_8(st)
   else:
     print("motor selector out of range")
   #GPIO.cleanup()
+
+'''
+EPHEM CALCULATIONS
+'''
+# Calculate the number of steps per degree
+stepCircle = 4100 #number of steps to turn 360
+steps_1_deg = stepCircle/360
+
+old_m0_stepCount = 0 #old SunAlt
+cur_m0_stepCount = 0 #current SunAlt
+old_m1_stepCount = 0 #old sunAz
+cur_m1_stepCount = 0 #current sunAz
+old_m2_stepCount = 0 #old moonAz
+cur_m2_stepCount = 0 #current moonAz
+old_m3_stepCount = 0 #old moonAlt
+cur_m3_stepCount = 0 #current moonAlt
+
+def m0_update(): #sunAlt
+  global old_m0_stepCount
+  global cur_m0_stepCount
+  cur_m0_stepCount = round(sunAlt * steps_1_deg)
+  m0_takeSteps = cur_m0_stepCount - old_m0_stepCount
+  m0steps_8(m0_takeSteps)
+  old_m0_stepCount = cur_m0_stepCount
+  #print('m0 stepCount (old: {}, cur: {}, dif: {})'.format(old_m0_stepCount,cur_m0_stepCount,m0_takeSteps))
+
+def m1_update(): #sunAz
+  global old_m1_stepCount
+  global cur_m1_stepCount
+  cur_m1_stepCount = round(sunAz * steps_1_deg)
+  m1_takeSteps = cur_m1_stepCount - old_m1_stepCount
+  m1steps_8(m1_takeSteps)
+  old_m1_stepCount = cur_m1_stepCount
+  #print('m1 stepCount (old: {}, cur: {}, dif: {})'.format(old_m1_stepCount,cur_m1_stepCount,m1_takeSteps))
+  
+
+def m2_update(): #moonAz
+  global old_m2_stepCount
+  global cur_m2_stepCount
+  cur_m2_stepCount = round(moonAz * steps_1_deg)
+  m2_takeSteps = cur_m2_stepCount - old_m2_stepCount
+  m2steps_8(m2_takeSteps)
+  old_m2_stepCount = cur_m2_stepCount
+  #print('m2 stepCount (old: {}, cur: {}, dif: {})'.format(old_m2_stepCount,cur_m2_stepCount,m2_takeSteps))
+
+def m3_update(): #moonAlt
+  global old_m3_stepCount
+  global cur_m3_stepCount
+  cur_m3_stepCount = round(moonAlt * steps_1_deg)
+  m3_takeSteps = cur_m3_stepCount - old_m3_stepCount
+  m3steps_8(m3_takeSteps)
+  old_m3_stepCount = cur_m3_stepCount
+  #print('m3 stepCount (old: {}, cur: {}, dif: {})'.format(old_m3_stepCount,cur_m3_stepCount,m3_takeSteps))
+
+def run():
+  # Runs every 5 minutes
+  while True:
+    # Need to create a new Observer object for each current time 
+    home = ephem.Observer()
+    home.lat = ephem.degrees('51:54:39')
+    home.lon = ephem.degrees('4:30:1')
+  
+    sun = ephem.Sun()
+    moon = ephem.Moon()
+    sun.compute(home)
+    moon.compute(home)
+    
+    # calculating in degrees
+    sunAz = int(math.degrees(sun.az))
+    sunAlt = int(math.degrees(sun.alt))
+    moonAz = int(math.degrees(moon.az))
+    moonAlt = int(math.degrees(moon.alt))
+    
+    #print(time.ctime())
+    #print('Sun  Altitude (m0):',sunAlt)
+    #print('Sun   Azimuth (m1):',sunAz)
+    #print('Moon  Azimuth (m2):',moonAz)
+    #print('Moon Altitude (m3):',moonAlt)
+    
+    #m0_update()
+    m1_update()
+    #m2_update()
+    #m3_update()
+    #print()
+    time.sleep(300)
+
 
 '''  
 if __name__ == "__main__":
