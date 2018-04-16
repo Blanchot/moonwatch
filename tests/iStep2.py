@@ -404,7 +404,7 @@ def run():
     moonAz = int(math.degrees(moon.az))
     moonAlt = int(math.degrees(moon.alt))
     
-    #print(time.ctime())
+    print(time.ctime())
     #print('Sun  Altitude (m0):',sunAlt)
     #print('Sun   Azimuth (m1):',sunAz)
     #print('Moon  Azimuth (m2):',moonAz)
@@ -414,7 +414,7 @@ def run():
     m1_update(sunAz)
     #m2_update(moonAz)
     #m3_update(moonAlt)
-    #print()
+    print()
     time.sleep(300)
 
 
