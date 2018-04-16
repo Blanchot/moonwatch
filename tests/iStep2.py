@@ -1,7 +1,11 @@
 #iStep2.py
-#Code from here: http://ingeniapp.com/en/stepper-motor-control-with-raspberry-pi/
 #Load from CLI: python3 -i iStep2.py
-#Added moon calculations
+#To calibrate motors: calibrate(amount,motor)
+#To autocalibrate: autocalibrate()
+#Motor control based on code from here: 
+#http://ingeniapp.com/en/stepper-motor-control-with-raspberry-pi/
+
+#Last update: added autocalibration code
 
 import time
 import sys
@@ -318,7 +322,7 @@ def m3steps_8(value):
       m3pas-=1
   m3step_8(0)
 
-def cal(amount,motor): #calibrate motors
+def calibrate(amount,motor): #calibrate each motor by hand
   st = amount
   if motor == 0:
     m0steps_8(st)
@@ -330,7 +334,23 @@ def cal(amount,motor): #calibrate motors
     m3steps_8(st)
   else:
     print("motor selector out of range")
-  #GPIO.cleanup()
+
+def autocalibrate(): #reverse 'last positions' for autocalibration
+  f_in = open('last_positions', 'rt') 
+  read_str = f_in.read()
+  f_in.close()
+  
+  read_pos_list = read_str.split()
+  print(read_pos_list)
+  # turn each element of the list into an int and reverse its sign
+  recalib_m0 = (int(read_pos_list[0])) * -1
+  recalib_m1 = (int(read_pos_list[1])) * -1
+  recalib_m2 = (int(read_pos_list[2])) * -1
+  recalib_m3 = (int(read_pos_list[3])) * -1
+  m0steps_8(recalib_m0)
+  m1steps_8(recalib_m1)
+  m2steps_8(recalib_m2)
+  m3steps_8(recalib_m3)
 
 '''
 EPHEM CALCULATIONS
@@ -381,7 +401,7 @@ def m3_update(moonAlt): #moonAlt
   cur_m3_stepCount = round(moonAlt * steps_1_deg)
   m3_takeSteps = cur_m3_stepCount - old_m3_stepCount
   m3steps_8(m3_takeSteps)
-  print('moonAlt (m3): {} steps (old: {}, cur: {}, dif: {})'.format(moonAlt, old_m3_stepCount,cur_m3_stepCount,m3_takeSteps))
+  print('moonAlt (m3): {}, steps (old: {}, cur: {}, dif: {})'.format(moonAlt, old_m3_stepCount,cur_m3_stepCount,m3_takeSteps))
   old_m3_stepCount = cur_m3_stepCount
   
 
@@ -414,7 +434,16 @@ def run():
     m1_update(sunAz)
     m2_update(moonAz)
     m3_update(moonAlt)
-    print()
+    print() #empty line after printing update info for each motor
+    
+    #Code to (over)write 'last positions' to a file which
+    #can be read in again as part of the calibration function
+    pos_list = [str(sunAlt), str(sunAz), str(moonAz), str(moonAlt)]
+    write_str = ' '.join(pos_list)
+    #print(write_str)
+    with open('last_positions', 'wt') as f_out:
+      f_out.write(write_str)
+    
     time.sleep(300)
 
 
