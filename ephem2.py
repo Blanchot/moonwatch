@@ -19,9 +19,11 @@ cur_m2_stepCount = 0 #current moonAz
 old_m3_stepCount = 0 #old moonAlt
 cur_m3_stepCount = 0 #current moonAlt
 
+'''
 def init():
   global cur_m1_stepCount
   cur_m1_stepCount = 0 #number of steps clockwise
+'''
 
 def m0_update(): #sunAlt
   global old_m0_stepCount
