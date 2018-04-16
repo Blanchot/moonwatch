@@ -231,7 +231,7 @@ def m3step_8 (p):
     GPIO.output(20,1)
 
 def m0steps_8(value):
-  print(value)
+  #print(value)
   global m0pas
   global m0 #m0 counter (right altitude)
   if(value>0): #reversed original code- was if(value<0):
@@ -253,7 +253,7 @@ def m0steps_8(value):
   m0step_8(0)
 
 def m1steps_8(value):
-  print(value)
+  #print(value)
   global m1pas
   global m1 #m1 counter (right azimuth)
   if(value>0): #reversed original code- was if(value<0):
@@ -275,7 +275,7 @@ def m1steps_8(value):
   m1step_8(0)
 
 def m2steps_8(value):
-  print(value)
+  #print(value)
   global m2pas
   global m2 #m2 counter (left azimuth)
   if(value>0): #reversed original code- was if(value<0):
@@ -297,7 +297,7 @@ def m2steps_8(value):
   m2step_8(0)
 
 def m3steps_8(value):
-  print(value)
+  #print(value)
   global m3pas
   global m3 #m3 counter (left altitude)
   if(value>0): #reversed original code- was if(value<0):
@@ -354,8 +354,8 @@ def m0_update(sunAlt): #sunAlt
   cur_m0_stepCount = round(sunAlt * steps_1_deg)
   m0_takeSteps = cur_m0_stepCount - old_m0_stepCount
   m0steps_8(m0_takeSteps)
+  print('sunAlt (m0): {}, steps (old: {}, cur: {}, dif: {})'.format(sunAlt, old_m0_stepCount,cur_m0_stepCount,m0_takeSteps))
   old_m0_stepCount = cur_m0_stepCount
-  print('sunAlt: {}, steps (old: {}, cur: {}, dif: {})'.format(sunAlt, old_m0_stepCount,cur_m0_stepCount,m0_takeSteps))
 
 def m1_update(sunAz): #sunAz
   global old_m1_stepCount
@@ -363,8 +363,8 @@ def m1_update(sunAz): #sunAz
   cur_m1_stepCount = round(sunAz * steps_1_deg)
   m1_takeSteps = cur_m1_stepCount - old_m1_stepCount
   m1steps_8(m1_takeSteps)
+  print('sunAz (m1): {}, steps (old: {}, cur: {}, dif: {})'.format(sunAz, old_m1_stepCount,cur_m1_stepCount,m1_takeSteps))
   old_m1_stepCount = cur_m1_stepCount
-  print('sunAz: {}, steps (old: {}, cur: {}, dif: {})'.format(sunAz, old_m1_stepCount,cur_m1_stepCount,m1_takeSteps))
 
 def m2_update(): #moonAz
   global old_m2_stepCount
@@ -372,8 +372,8 @@ def m2_update(): #moonAz
   cur_m2_stepCount = round(moonAz * steps_1_deg)
   m2_takeSteps = cur_m2_stepCount - old_m2_stepCount
   m2steps_8(m2_takeSteps)
+  print('moonAz (m2): {}, steps (old: {}, cur: {}, dif: {})'.format(moonAz, old_m2_stepCount,cur_m2_stepCount,m2_takeSteps))
   old_m2_stepCount = cur_m2_stepCount
-  #print('m2 stepCount (old: {}, cur: {}, dif: {})'.format(old_m2_stepCount,cur_m2_stepCount,m2_takeSteps))
 
 def m3_update(): #moonAlt
   global old_m3_stepCount
@@ -381,8 +381,9 @@ def m3_update(): #moonAlt
   cur_m3_stepCount = round(moonAlt * steps_1_deg)
   m3_takeSteps = cur_m3_stepCount - old_m3_stepCount
   m3steps_8(m3_takeSteps)
+  print('moonAlt (m3): {} steps (old: {}, cur: {}, dif: {})'.format(moonAlt, old_m3_stepCount,cur_m3_stepCount,m3_takeSteps))
   old_m3_stepCount = cur_m3_stepCount
-  #print('m3 stepCount (old: {}, cur: {}, dif: {})'.format(old_m3_stepCount,cur_m3_stepCount,m3_takeSteps))
+  
 
 def run():
   # Runs every 5 minutes
@@ -411,8 +412,8 @@ def run():
     
     m0_update(sunAlt)
     m1_update(sunAz)
-    #m2_update()
-    #m3_update()
+    #m2_update(moonAz)
+    #m3_update(moonAlt)
     #print()
     time.sleep(300)
 
