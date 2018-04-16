@@ -336,6 +336,10 @@ def calibrate(amount,motor): #calibrate each motor by hand
     print("motor selector out of range")
 
 def autocalibrate(): #reverse 'last positions' for autocalibration
+  global m0
+  global m1
+  global m2
+  global m3
   f_in = open('last_positions', 'rt') 
   read_str = f_in.read()
   f_in.close()
@@ -351,6 +355,12 @@ def autocalibrate(): #reverse 'last positions' for autocalibration
   m1steps_8(recalib_m1)
   m2steps_8(recalib_m2)
   m3steps_8(recalib_m3)
+  
+  #Reset each motor to 0
+  m0 = 0
+  m1 = 0
+  m2 = 0
+  m3 = 0
 
 '''
 EPHEM CALCULATIONS
@@ -445,7 +455,6 @@ def run():
       f_out.write(write_str)
     
     time.sleep(300)
-
 
 '''  
 if __name__ == "__main__":
