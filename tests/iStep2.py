@@ -1,8 +1,7 @@
 #iStep2.py
 #Code from here: http://ingeniapp.com/en/stepper-motor-control-with-raspberry-pi/
 #Load from CLI: python3 -i iStep2.py
-#Change to m1steps_8(value) if value<0: to if value>0 
-#to see if I can reverse rotation
+#Changed rotation and counter for m0 and m1
 
 import time
 import sys
@@ -232,11 +231,11 @@ def m0steps_8(value):
   print(value)
   global m0pas
   global m0 #m0 counter (right altitude)
-  if(value<0):
+  if(value>0): #reversed original code- was if(value<0):
     for i in range (0,abs(value)):
       m0step_8(m0pas)
       time.sleep(0.01)
-      m0-=1 #subtract 1 from counter
+      m0+=1 #add 1 to counter (reversed)
       m0pas+=1
       if(m0pas>=9):
         m0pas=1;
@@ -244,7 +243,7 @@ def m0steps_8(value):
     for i in range (0,abs(value)):
       m0step_8(m0pas)
       time.sleep(0.01)
-      m0+=1 #add 1 to counter
+      m0-=1 #subtract 1 from counter (reversed)
       if(m0pas==1):
         m0pas=9;
       m0pas-=1
