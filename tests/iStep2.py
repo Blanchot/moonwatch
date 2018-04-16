@@ -1,7 +1,7 @@
 #iStep2.py
 #Code from here: http://ingeniapp.com/en/stepper-motor-control-with-raspberry-pi/
 #Load from CLI: python3 -i iStep2.py
-#Added sunAlt calculations
+#Added moon calculations
 
 import time
 import sys
@@ -412,8 +412,8 @@ def run():
     
     m0_update(sunAlt)
     m1_update(sunAz)
-    #m2_update(moonAz)
-    #m3_update(moonAlt)
+    m2_update(moonAz)
+    m3_update(moonAlt)
     print()
     time.sleep(300)
 
