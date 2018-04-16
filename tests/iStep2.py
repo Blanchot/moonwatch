@@ -384,7 +384,7 @@ def m0_update(sunAlt): #sunAlt
   cur_m0_stepCount = round(sunAlt * steps_1_deg)
   m0_takeSteps = cur_m0_stepCount - old_m0_stepCount
   m0steps_8(m0_takeSteps)
-  print('sunAlt (m0): {}, steps (old: {}, cur: {}, dif: {})'.format(sunAlt, old_m0_stepCount,cur_m0_stepCount,m0_takeSteps))
+  print('sunAlt: {}, m0 steps (old: {}, cur: {}, dif: {})'.format(sunAlt, old_m0_stepCount,cur_m0_stepCount,m0_takeSteps))
   old_m0_stepCount = cur_m0_stepCount
 
 def m1_update(sunAz): #sunAz
@@ -393,7 +393,7 @@ def m1_update(sunAz): #sunAz
   cur_m1_stepCount = round(sunAz * steps_1_deg)
   m1_takeSteps = cur_m1_stepCount - old_m1_stepCount
   m1steps_8(m1_takeSteps)
-  print('sunAz (m1): {}, steps (old: {}, cur: {}, dif: {})'.format(sunAz, old_m1_stepCount,cur_m1_stepCount,m1_takeSteps))
+  print('sunAz: {}, m1 steps (old: {}, cur: {}, dif: {})'.format(sunAz, old_m1_stepCount,cur_m1_stepCount,m1_takeSteps))
   old_m1_stepCount = cur_m1_stepCount
 
 def m2_update(moonAz): #moonAz
@@ -402,7 +402,7 @@ def m2_update(moonAz): #moonAz
   cur_m2_stepCount = round(moonAz * steps_1_deg)
   m2_takeSteps = cur_m2_stepCount - old_m2_stepCount
   m2steps_8(m2_takeSteps)
-  print('moonAz (m2): {}, steps (old: {}, cur: {}, dif: {})'.format(moonAz, old_m2_stepCount,cur_m2_stepCount,m2_takeSteps))
+  print('moonAz: {}, m2 steps (old: {}, cur: {}, dif: {})'.format(moonAz, old_m2_stepCount,cur_m2_stepCount,m2_takeSteps))
   old_m2_stepCount = cur_m2_stepCount
 
 def m3_update(moonAlt): #moonAlt
@@ -411,7 +411,7 @@ def m3_update(moonAlt): #moonAlt
   cur_m3_stepCount = round(moonAlt * steps_1_deg)
   m3_takeSteps = cur_m3_stepCount - old_m3_stepCount
   m3steps_8(m3_takeSteps)
-  print('moonAlt (m3): {}, steps (old: {}, cur: {}, dif: {})'.format(moonAlt, old_m3_stepCount,cur_m3_stepCount,m3_takeSteps))
+  print('moonAlt: {}, m3 steps (old: {}, cur: {}, dif: {})'.format(moonAlt, old_m3_stepCount,cur_m3_stepCount,m3_takeSteps))
   old_m3_stepCount = cur_m3_stepCount
   
 
