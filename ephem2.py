@@ -6,6 +6,8 @@ import ephem
 import math
 import time
 
+counter = 1
+
 # Calculate the number of steps per degree
 stepCircle = 4100 #number of steps to turn 360
 steps_1_deg = stepCircle/360
@@ -56,7 +58,7 @@ def m3_update(): #moonAlt
 
 # Runs every 5 minutes
 while True:
-  counter = 1
+  global counter
   
   # Need to create a new Observer object for each current time 
   home = ephem.Observer()
