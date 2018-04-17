@@ -56,7 +56,7 @@ def m3_update(): #moonAlt
 
 # Runs every 5 minutes
 while True:
-  counter = 12
+  counter = 1
   
   # Need to create a new Observer object for each current time 
   home = ephem.Observer()
