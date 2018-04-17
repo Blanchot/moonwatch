@@ -4,7 +4,9 @@
 
 import ephem
 import math
-import time 
+import time
+
+counter = 1 #number of 5 minute updates
 
 # Calculate the number of steps per degree
 stepCircle = 4100 #number of steps to turn 360
@@ -18,12 +20,6 @@ old_m2_stepCount = 0 #old moonAz
 cur_m2_stepCount = 0 #current moonAz
 old_m3_stepCount = 0 #old moonAlt
 cur_m3_stepCount = 0 #current moonAlt
-
-'''
-def init():
-  global cur_m1_stepCount
-  cur_m1_stepCount = 0 #number of steps clockwise
-'''
 
 def m0_update(): #sunAlt
   global old_m0_stepCount
@@ -93,6 +89,19 @@ while True:
   m1_update()
   m2_update()
   m3_update()
-  print('SUN-MOON DIF: alt:',abs(sunAlt-moonAlt),'az:',abs(sunAz-moonAz))
+  
+  difAlt = abs(sunAlt-moonAlt)
+  difAz = abs(sunAz-moonAz)
+  
+  print('SUN-MOON DIF: alt:',difAlt,'az:',difAz)
   print()
+  
+  # Write dif alt and dif az to log file every 3 hours
+  dif_list = [str(difAlt), str(difAz)]
+  write_str = ', '.join(dif_list)
+  #print(write_str)
+  with open('alt_az_dif_log', 'wt') as f_out:
+    f_out.write(time.ctime())
+    f_out.write(write_str)
+   
   time.sleep(300)
