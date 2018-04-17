@@ -93,6 +93,6 @@ while True:
   m1_update()
   m2_update()
   m3_update()
-  print('Sun-Moon Alt diff:',abs(sunAlt-moonAlt),'Az diff:',abs(sunAz-moonAz))
+  print('SUN-MOON DIF: alt:',abs(sunAlt-moonAlt),'az:',abs(sunAz-moonAz))
   print()
   time.sleep(300)
