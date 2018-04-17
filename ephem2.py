@@ -58,6 +58,7 @@ def m3_update(): #moonAlt
 
 # Runs every 5 minutes
 while True:
+  global counter
   # Need to create a new Observer object for each current time 
   home = ephem.Observer()
   home.lat = ephem.degrees('51:54:39')
@@ -97,10 +98,13 @@ while True:
   print()
   
   # Write dif alt and dif az to log file every 3 hours
-  dif_list = [time.ctime(), str(difAlt), str(difAz)]
-  write_str = ', '.join(dif_list)
-  #print(write_str)
-  with open('alt_az_dif_log', 'at') as f_out:
-    f_out.write(write_str)
-   
+  counter +=1
+  
+  if counter >= 36:
+    dif_list = [time.ctime(), str(difAlt), str(difAz)]
+    write_str = ', '.join(dif_list)
+    with open('alt_az_dif_log', 'at') as f_out:
+      f_out.write(write_str)
+    counter = 1
+
   time.sleep(300)
