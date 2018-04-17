@@ -100,11 +100,11 @@ while True:
   # Write dif alt and dif az to log file every 3 hours
   counter +=1
   
-  if counter >= 36:
+  if counter >= 1:
     dif_list = [time.ctime(), str(difAlt), str(difAz)]
     write_str = ', '.join(dif_list)
     with open('alt_az_dif_log', 'at') as f_out:
-      f_out.write(write_str)
+      f_out.write(write_str + '\n')
     counter = 1
 
   time.sleep(300)
