@@ -97,11 +97,10 @@ while True:
   print()
   
   # Write dif alt and dif az to log file every 3 hours
-  dif_list = [str(difAlt), str(difAz)]
+  dif_list = [time.ctime(), str(difAlt), str(difAz)]
   write_str = ', '.join(dif_list)
   #print(write_str)
   with open('alt_az_dif_log', 'wt') as f_out:
-    f_out.write(time.ctime())
     f_out.write(write_str)
    
   time.sleep(300)
