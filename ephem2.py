@@ -100,7 +100,7 @@ while True:
   dif_list = [time.ctime(), str(difAlt), str(difAz)]
   write_str = ', '.join(dif_list)
   #print(write_str)
-  with open('alt_az_dif_log', 'wt') as f_out:
+  with open('alt_az_dif_log', 'at') as f_out:
     f_out.write(write_str)
    
   time.sleep(300)
