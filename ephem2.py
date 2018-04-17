@@ -105,7 +105,7 @@ while True:
     with open('alt_az_dif_log', 'at') as f_out:
       f_out.write(write_str + '\n')
     counter = 1
-  else:
+  elif counter < 12:
     counter += 1
 
   time.sleep(300)
