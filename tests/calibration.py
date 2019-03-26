@@ -1,5 +1,5 @@
-#iStep2.py
-#Load from CLI: python3 -i iStep2.py
+#calibration.py
+#Load from CLI: python3 -i calibration.py
 #To calibrate motors: calibrate(amount,motor)
 #To autocalibrate: autocalibrate()
 #Motor control based on code from here: 
